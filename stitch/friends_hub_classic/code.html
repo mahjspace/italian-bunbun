@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Friends Hub - MahjSpace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-high": "#0e3019",
+              "secondary-fixed": "#ffdea4",
+              "primary-fixed-dim": "#c8c6c2",
+              "background": "#001807",
+              "surface-tint": "#c8c6c2",
+              "surface-container-low": "#00210c",
+              "secondary-fixed-dim": "#e4c285",
+              "error": "#ffb4ab",
+              "tertiary": "#a1d2ab",
+              "tertiary-fixed-dim": "#a1d2ab",
+              "surface-container-lowest": "#001205",
+              "error-container": "#93000a",
+              "on-tertiary": "#07381d",
+              "primary-container": "#3a3a37",
+              "on-primary-container": "#a5a49f",
+              "on-primary-fixed-variant": "#474743",
+              "on-primary-fixed": "#1b1c19",
+              "surface-dim": "#001807",
+              "outline-variant": "#424842",
+              "inverse-primary": "#5f5e5b",
+              "surface-container-highest": "#193c23",
+              "on-secondary-fixed-variant": "#5a4312",
+              "surface": "#001807",
+              "outline": "#8c938a",
+              "on-secondary-container": "#d5b478",
+              "tertiary-container": "#144225",
+              "on-background": "#c5ecc9",
+              "surface-variant": "#193c23",
+              "inverse-surface": "#c5ecc9",
+              "on-primary": "#30312d",
+              "surface-bright": "#1e4027",
+              "on-surface": "#c5ecc9",
+              "on-tertiary-fixed-variant": "#225031",
+              "secondary": "#e4c285",
+              "on-surface-variant": "#c2c8bf",
+              "on-error-container": "#ffdad6",
+              "on-tertiary-fixed": "#00210d",
+              "on-secondary-fixed": "#261900",
+              "secondary-container": "#5d4514",
+              "inverse-on-surface": "#15371f",
+              "primary-fixed": "#e4e2dd",
+              "on-secondary": "#412d00",
+              "on-tertiary-container": "#7faf89",
+              "primary": "#c8c6c2",
+              "surface-container": "#02260f",
+              "on-error": "#690005",
+              "tertiary-fixed": "#bcefc6"
+            },
+            fontFamily: {
+              "headline": ["Newsreader"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #001807;
+            color: #c8c6c2;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body selection:bg-secondary/30">
+<!-- TopAppBar -->
+<header class="bg-[#1f4128] dark:bg-[#001807] flex justify-between items-center w-full px-6 py-4 fixed top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant/20">
+<img class="w-full h-full object-cover" data-alt="Portrait of the user for profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEkJJp47mVfuPdNoAoKh0VaYB97GcwhfQhF-OePwtiz8SwUFRxiZI-q-jOSTtYLaY6kOS9N4hYTF4U5hGI1wdSMBDCDGdgrGRoQu575f2DRvMROvCctC4duJIOlBvvvl_ZN5hD0QfHN7EOVlkXrox3voVFoHfKN8WmGo_h5W7T8j41H-JtTgmx5HhOnxwAC2_CYNSfEJlp_vtx22WTo8qQCpx8z-2pN6rs3yuF-XY3yCa48jLRp8vIMgxEdktjzCd_Gk5JC16rwf17"/>
+</div>
+<h1 class="font-serif italic text-2xl text-[#e4c285] dark:text-[#e4c285]">MahjSpace</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-[#c8c6c2] hover:bg-[#1e4027] transition-colors duration-300 p-2 rounded-full active:scale-95 duration-300 ease-out">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-2xl mx-auto space-y-12">
+<!-- Search Section -->
+<section class="space-y-4">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline/50 group-focus-within:text-secondary transition-colors">person_search</span>
+<input class="w-full bg-surface-container-lowest border-none border-b border-outline-variant/30 focus:border-secondary focus:ring-0 text-primary py-4 pl-12 pr-4 rounded-sm transition-all duration-300 placeholder:text-outline/40" placeholder="Search by name or email" type="text"/>
+</div>
+</section>
+<!-- Quick Actions (Asymmetric Bento) -->
+<section class="grid grid-cols-2 gap-4">
+<button class="flex flex-col items-start justify-between p-6 bg-surface-container h-40 rounded-sm hover:bg-surface-bright transition-all duration-300 active:scale-[0.98]">
+<span class="material-symbols-outlined text-secondary text-3xl">grid_view</span>
+<span class="font-headline italic text-2xl text-primary">Start Table</span>
+</button>
+<button class="flex flex-col items-start justify-between p-6 bg-surface-container-low h-40 rounded-sm hover:bg-surface-bright transition-all duration-300 active:scale-[0.98]">
+<span class="material-symbols-outlined text-outline text-3xl">history_edu</span>
+<span class="font-headline italic text-2xl text-primary-fixed-dim">History</span>
+</button>
+</section>
+<!-- Pending Invites Section -->
+<section class="space-y-6">
+<h2 class="font-headline text-3xl italic text-primary-fixed">Pending Invites</h2>
+<div class="bg-surface-container p-6 rounded-sm border-l-2 border-secondary/50 flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-4 w-full">
+<div class="w-14 h-14 bg-surface-variant rounded-full flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of Samantha Wu" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB20v-tUufp6LYqeZ4ncWoj5uR9YfOvEMGP6fOc7ectLWGhjA_Uq1BxXA1CuUmPfraSXOCYaxIOpp6iFvvLMmbUjA92l7JS2W_xiDaE_DaK7EVyIAmZbvxaPeptFYwfa9xRdA8nmcRNfXs0pi6O1PlpKqfb-RiCrZNCXjT2tprEW3JO7JYitIJJ4WTVOobOi2eTJuatQFYW9NdBj6IjIpT3qcf_Uo21LjJtyzH35SSAUFGvH3ytAkX9oBqfpVMdQgfk36xby7C4rgv4"/>
+</div>
+<div>
+<p class="font-headline text-xl text-primary">Samantha Wu</p>
+<p class="font-body text-xs text-outline tracking-wider uppercase">Wants to join your circle</p>
+</div>
+</div>
+<div class="flex items-center gap-3 w-full md:w-auto">
+<button class="flex-1 md:flex-none bg-secondary text-on-secondary px-6 py-2 rounded-sm font-label font-bold text-sm hover:bg-secondary-fixed-dim transition-all active:translate-y-[2px]">Accept</button>
+<button class="flex-1 md:flex-none bg-transparent border border-outline-variant/30 text-primary px-6 py-2 rounded-sm font-label text-sm hover:bg-surface-variant transition-all">Decline</button>
+</div>
+</div>
+</section>
+<!-- Friends List Section -->
+<section class="space-y-8">
+<div class="flex justify-between items-baseline">
+<h2 class="font-headline text-3xl italic text-primary-fixed">Friends List</h2>
+<span class="font-label text-xs text-outline/60 uppercase tracking-widest">3 active</span>
+</div>
+<div class="grid gap-4">
+<!-- Nikki R. -->
+<div class="bg-[#274f32] p-6 rounded-sm space-y-4 hover:bg-surface-bright transition-all duration-500">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full border border-secondary/20 p-0.5">
+<img class="w-full h-full object-cover rounded-full" data-alt="Profile image of Nikki R." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaHnnnfAfBvM9kGank-awWNRtDnEq6L92obe4np47RKoqU5UZiDtOIiBvp9255yA9z3Fummb0o0UmyxJ6h0GL6okgL2lIMieppWHc9rAkmU-xXE_a5t2m_FI89ETzzr9hdJawreVVZv8W20MYM5uBHhAoP2emPW8hqZFOpQk_q7ETuzcSOih-CswHXJbFi-quNpZ-JWqN48HbSKjxQ_9r9zZTh-x_mZtAToMRqIRk1oJuseRCVp4kSTDo84aBMASLP3-lXYnTvUS0c"/>
+</div>
+<span class="font-headline text-xl text-primary">Nikki R.</span>
+</div>
+<span class="font-headline text-secondary text-2xl">72%</span>
+</div>
+<div class="space-y-2">
+<div class="h-1 bg-background w-full rounded-full overflow-hidden">
+<div class="h-full bg-secondary transition-all" style="width: 72%;"></div>
+</div>
+<p class="font-label text-[10px] text-outline uppercase tracking-tighter">Completion Mastery</p>
+</div>
+</div>
+<!-- Janet T. -->
+<div class="bg-[#274f32] p-6 rounded-sm space-y-4 hover:bg-surface-bright transition-all duration-500">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full border border-secondary/20 p-0.5">
+<img class="w-full h-full object-cover rounded-full" data-alt="Profile image of Janet T." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVf_MKFWblyZlVD6AW7Txpb7bdKnnTB7WDLAY0Wr2AZxS8e7d1m8yaI8sl_30tiE9WQ855bDMqbF3A-LJvVL0GfFrEofs_cVfHEsCC_Fk1ZsFDE81EanzdT-ic4Jx7U0GIm0vnbQRxEVBcbEQj8EkAkhqMSjmePVDFlJOE88UVWIOJiBJVq7yFVqi9SFCZKBqABVUMZTjArHSE1es3i08enZ4FWLfLw4phTKS2hY6q8XQBpjMgQjHJCtlbcdpBkj0rJuO8vBCpjrDv"/>
+</div>
+<span class="font-headline text-xl text-primary">Janet T.</span>
+</div>
+<span class="font-headline text-secondary text-2xl">45%</span>
+</div>
+<div class="space-y-2">
+<div class="h-1 bg-background w-full rounded-full overflow-hidden">
+<div class="h-full bg-secondary transition-all" style="width: 45%;"></div>
+</div>
+<p class="font-label text-[10px] text-outline uppercase tracking-tighter">Skill Sync</p>
+</div>
+</div>
+<!-- Diane L. -->
+<div class="bg-[#274f32] p-6 rounded-sm space-y-4 hover:bg-surface-bright transition-all duration-500">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full border border-secondary/20 p-0.5">
+<img class="w-full h-full object-cover rounded-full" data-alt="Profile image of Diane L." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxChb9es3ZjYy_lfIksPko59Pq_-Gy7r5_LkPXJRSUhNK71mAQQ-n0JMchaInTAErUyQLzP_RqZcADEIIlqcV3bx1hTQ9vDXMkWumdtLthvLxLRl9_xBgMtSrQfjjAkqUsVajWDlGLvy-f5pJ7rZ02muDvKNxMlcJ6_j7xRVicWGryQMJGKjqPRlKrKiXK5hbivEWCF-UYR2Xw2CGQWuv7Fy-i_LETTT5BUai86W91G6BY3ONkiPxA3ogTa9yukZ5qvTIyetVbibgy"/>
+</div>
+<span class="font-headline text-xl text-primary">Diane L.</span>
+</div>
+<span class="font-headline text-secondary text-2xl">90%</span>
+</div>
+<div class="space-y-2">
+<div class="h-1 bg-background w-full rounded-full overflow-hidden">
+<div class="h-full bg-secondary transition-all" style="width: 90%;"></div>
+</div>
+<p class="font-label text-[10px] text-outline uppercase tracking-tighter">Veteran Harmony</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-8 pb-6 pt-3 bg-[#1f4128]/70 dark:bg-[#001807]/70 backdrop-blur-xl shadow-[0_-4px_20px_rgba(0,18,5,0.15)]">
+<!-- Tracker Tab -->
+<a class="flex flex-col items-center justify-center text-[#c8c6c2]/50 hover:text-[#e4c285] transition-all" href="#">
+<span class="material-symbols-outlined mb-1">leaderboard</span>
+<span class="font-sans font-medium text-[11px] tracking-wide Manrope">Tracker</span>
+</a>
+<!-- Friends Tab (ACTIVE) -->
+<a class="flex flex-col items-center justify-center text-[#e4c285] font-bold translate-y-[-2px] duration-300" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-sans font-medium text-[11px] tracking-wide Manrope">Friends</span>
+</a>
+</nav>
+</body></html>

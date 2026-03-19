@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MahjSpace Tracker</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;800&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed": "#c9ebce",
+              "on-secondary-fixed-variant": "#5a4312",
+              "surface-variant": "#e5e2dd",
+              "on-secondary-fixed": "#261900",
+              "error-container": "#ffdad6",
+              "surface-dim": "#dcdad5",
+              "surface-tint": "#43664a",
+              "on-tertiary-fixed": "#03210f",
+              "on-error-container": "#93000a",
+              "outline": "#727971",
+              "primary-fixed-dim": "#a9d0ae",
+              "on-surface-variant": "#424842",
+              "tertiary": "#0c2a18",
+              "on-secondary": "#ffffff",
+              "surface-bright": "#fcf9f4",
+              "outline-variant": "#c2c8bf",
+              "surface-container-highest": "#e5e2dd",
+              "tertiary-container": "#23402c",
+              "secondary-fixed": "#ffdea4",
+              "inverse-primary": "#a9d0ae",
+              "surface-container-lowest": "#ffffff",
+              "background": "#fcf9f4",
+              "on-error": "#ffffff",
+              "on-tertiary-container": "#8bac92",
+              "on-primary-container": "#87ad8d",
+              "error": "#ba1a1a",
+              "on-primary": "#ffffff",
+              "on-tertiary": "#ffffff",
+              "surface-container": "#f0ede8",
+              "on-primary-fixed-variant": "#2c4e34",
+              "on-surface": "#1c1c19",
+              "on-primary-fixed": "#00210c",
+              "primary-fixed": "#c5ecc9",
+              "primary-container": "#1f4128",
+              "surface-container-high": "#ebe8e3",
+              "on-secondary-container": "#795f2b",
+              "surface": "#fcf9f4",
+              "primary": "#072b14",
+              "secondary-container": "#fedb9b",
+              "inverse-on-surface": "#f3f0eb",
+              "tertiary-fixed-dim": "#adcfb3",
+              "secondary-fixed-dim": "#e4c285",
+              "surface-container-low": "#f6f3ee",
+              "secondary": "#745a27",
+              "on-background": "#1c1c19",
+              "inverse-surface": "#31302d",
+              "on-tertiary-fixed-variant": "#304d38"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif", "serif"],
+              "body": ["Manrope", "sans-serif"],
+              "label": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .filled-icon {
+        font-variation-settings: 'FILL' 1;
+      }
+      body {
+        font-family: 'Manrope', sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .font-noto-serif { font-family: 'Noto Serif', serif; }
+      .font-manrope { font-family: 'Manrope', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-32 selection:bg-secondary-container">
+<!-- TopAppBar -->
+<header class="bg-[#fcf9f4] dark:bg-[#121212] flex justify-between items-center px-6 py-4 w-full sticky top-0 z-40">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Close up portrait of a smiling person in warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBx6BSQc1_QnuxTpyySl6KCQV9il2CZFmFtBLY1qTWJbcD72dtf6cooS40B4R7oWhN5UXZgZsOn_YzDI5s8KuiDcC-hEqid4d_zidAc78zPJyNzSqZihqML8mtig30-tTXes0Vk5aPCqRMMUHZZi-kzDxNjTE-2iBpek2umx5xsuqUCa89ey21VtdQ7J9GlffNXoMJDlUPzZmWspFFzTCM8cGBMC1wSD7Xg-qXyHLJXqD5zYrTcUt2BAge76vDUaniiCvD_-Rm51J0k"/>
+</div>
+<h1 class="font-noto-serif font-bold text-[#072b14] dark:text-[#fedb9b] text-2xl tracking-tight">MahjSpace</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#072b14] dark:text-[#fedb9b] cursor-pointer hover:opacity-80 transition-opacity active:scale-95">notifications</span>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="max-w-xl mx-auto px-6 pt-8">
+<!-- Header & Progress Section -->
+<section class="mb-8">
+<div class="flex justify-between items-end mb-4">
+<div>
+<p class="font-manrope uppercase tracking-widest text-[10px] text-secondary font-bold mb-1">Session Record</p>
+<h2 class="font-noto-serif text-4xl font-extrabold text-primary">Tracker</h2>
+</div>
+<div class="text-right">
+<p class="font-noto-serif text-2xl font-bold text-primary">24%</p>
+<p class="font-manrope text-[10px] uppercase tracking-tighter opacity-60">14/57 Hands</p>
+</div>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary to-primary-container w-[24%]"></div>
+</div>
+</section>
+<!-- Tip Card (Asymmetric Layout) -->
+<section class="mb-10 relative">
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_24px_rgba(28,28,25,0.06)] border-l-4 border-secondary relative z-10 mr-4">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-secondary text-3xl">lightbulb</span>
+<div>
+<p class="font-manrope uppercase tracking-widest text-[10px] text-secondary font-bold mb-2">Tactile Wisdom</p>
+<p class="font-noto-serif text-lg leading-relaxed text-on-surface">
+                            When someone discards a <span class="text-primary font-bold">One Bam</span>, say <span class="italic">'Cheers!'</span> 🥂
+                        </p>
+</div>
+</div>
+</div>
+<!-- Decorative Offset Element -->
+<div class="absolute top-2 right-0 w-32 h-full bg-secondary-container/20 -z-0 rounded-xl"></div>
+</section>
+<!-- Categories List (Sophisticated Accordion) -->
+<section class="space-y-4">
+<div class="flex items-center justify-between mb-4">
+<span class="font-manrope uppercase tracking-widest text-[10px] text-on-surface/60 font-bold">Hand Categories</span>
+<span class="material-symbols-outlined text-on-surface/40 text-sm">filter_list</span>
+</div>
+<!-- Category Item: 2026 -->
+<div class="group">
+<div class="flex items-center justify-between bg-surface-container-low p-5 rounded-xl transition-all cursor-pointer hover:bg-surface-container-high">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 flex items-center justify-center rounded-md bg-primary text-secondary-fixed text-xs font-bold font-manrope">26</div>
+<span class="font-noto-serif text-lg font-bold text-primary">2026</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-manrope text-[10px] font-bold text-on-surface/40">3/6</span>
+<span class="material-symbols-outlined text-on-surface/40 transition-transform group-hover:rotate-180">expand_more</span>
+</div>
+</div>
+<!-- Expanded Content (Simulated for visual) -->
+<div class="mt-2 space-y-2 px-2">
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-lg">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary filled-icon" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-manrope text-sm font-medium">2026 2026 2026 NEWS</span>
+</div>
+<span class="font-manrope text-[10px] uppercase font-bold text-secondary">25 pts</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-lg border border-outline-variant/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline-variant">radio_button_unchecked</span>
+<span class="font-manrope text-sm font-medium">11 22 33 44 2026</span>
+</div>
+<span class="font-manrope text-[10px] uppercase font-bold text-on-surface/40">30 pts</span>
+</div>
+</div>
+</div>
+<!-- Category Item: 2468 -->
+<div class="flex items-center justify-between bg-surface-container-low p-5 rounded-xl cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 flex items-center justify-center rounded-md bg-surface-container-highest text-primary text-xs font-bold font-manrope">8</div>
+<span class="font-noto-serif text-lg font-bold text-primary">2468</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-manrope text-[10px] font-bold text-on-surface/40">0/8</span>
+<span class="material-symbols-outlined text-on-surface/40">chevron_right</span>
+</div>
+</div>
+<!-- Category Item: Like Numbers -->
+<div class="flex items-center justify-between bg-surface-container-low p-5 rounded-xl cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 flex items-center justify-center rounded-md bg-secondary-container text-on-secondary-container text-xs font-bold font-manrope">==</div>
+<span class="font-noto-serif text-lg font-bold text-primary">Like Numbers</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-manrope text-[10px] font-bold text-on-surface/40">5/12</span>
+<span class="material-symbols-outlined text-on-surface/40">chevron_right</span>
+</div>
+</div>
+<!-- Category Item: Consecutive Run -->
+<div class="flex items-center justify-between bg-surface-container-low p-5 rounded-xl cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 flex items-center justify-center rounded-md bg-surface-container-highest text-primary text-xs font-bold font-manrope">123</div>
+<span class="font-noto-serif text-lg font-bold text-primary">Consecutive Run</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-manrope text-[10px] font-bold text-on-surface/40">6/15</span>
+<span class="material-symbols-outlined text-on-surface/40">chevron_right</span>
+</div>
+</div>
+<!-- Category Item: Winds & Dragons -->
+<div class="flex items-center justify-between bg-surface-container-low p-5 rounded-xl cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 flex items-center justify-center rounded-md bg-surface-container-highest text-primary text-xs font-bold font-manrope">🐉</div>
+<span class="font-noto-serif text-lg font-bold text-primary">Winds &amp; Dragons</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-manrope text-[10px] font-bold text-on-surface/40">0/10</span>
+<span class="material-symbols-outlined text-on-surface/40">chevron_right</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center pb-8 pt-4 px-4 bg-[#fcf9f4]/80 dark:bg-[#121212]/80 backdrop-blur-md shadow-[0_-4px_24px_rgba(28,28,25,0.06)] rounded-t-3xl border-t border-[#072b14]/5">
+<!-- Tracker Tab (Active) -->
+<a class="flex flex-col items-center justify-center bg-gradient-to-br from-[#072b14] to-[#1f4128] text-[#fedb9b] rounded-xl px-6 py-2 transition-all scale-95 duration-200 ease-out" href="#">
+<span class="material-symbols-outlined filled-icon" style="font-variation-settings: 'FILL' 1;">playing_cards</span>
+<span class="font-manrope text-[10px] font-bold uppercase tracking-tighter mt-1">Tracker</span>
+</a>
+<!-- Friends Tab (Inactive) -->
+<a class="flex flex-col items-center justify-center text-[#072b14]/50 dark:text-[#fcf9f4]/50 px-6 py-2 hover:text-[#745a27] transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-manrope text-[10px] font-bold uppercase tracking-tighter mt-1">Friends</span>
+</a>
+</nav>
+<!-- Decorative Corner Element -->
+<div class="fixed bottom-24 -left-12 w-48 h-48 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="fixed top-1/2 -right-12 w-32 h-32 bg-secondary/5 rounded-full blur-2xl pointer-events-none"></div>
+</body></html>

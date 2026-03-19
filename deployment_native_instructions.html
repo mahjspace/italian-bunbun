@@ -1,0 +1,44 @@
+# Deploying MahjSpace to Vercel
+
+MahjSpace is built as a Progressive Web App (PWA) using React. This architecture allows it to function like a website while being ready to wrap as a native app (iOS/Android) using tools like Capacitor or React Native.
+
+## Prerequisites
+1. A [Vercel](https://vercel.com) account.
+2. [Node.js](https://nodejs.org/) installed on your machine.
+3. [Git](https://git-scm.com/) installed and a GitHub/GitLab/Bitbucket account.
+
+## Local Development & Preparation
+
+1. **Download the Source:** Use the "View Code" button on the canvas to download the project files.
+2. **Initialize Git:**
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit of MahjSpace ecosystem"
+   ```
+3. **Push to GitHub:** Create a new repository on GitHub and push your code:
+   ```bash
+   git remote add origin <your-repo-url>
+   git branch -M main
+   git push -u origin main
+   ```
+
+## Deploying to Vercel
+
+1. **Import Project:** Go to the [Vercel Dashboard](https://vercel.com/dashboard) and click **"New Project"**.
+2. **Connect Repository:** Find and import your MahjSpace repository.
+3. **Configure Project:** 
+   - Vercel will automatically detect the React framework.
+   - **Environment Variables:** If you are using your own Firebase config, add the following keys to the 'Environment Variables' section:
+     - `REACT_APP_FIREBASE_API_KEY`
+     - `REACT_APP_FIREBASE_AUTH_DOMAIN`
+     - `REACT_APP_FIREBASE_PROJECT_ID`
+4. **Deploy:** Click **"Deploy"**. Your app will be live on a `.vercel.app` URL in a few minutes.
+
+## Path to Native App
+
+When you are ready to go native, I recommend using **Capacitor**:
+1. Install Capacitor in your project: `npm install @capacitor/core @capacitor/cli`
+2. Initialize: `npx cap init`
+3. Add platforms: `npx cap add ios` or `npx cap add android`
+4. Sync your web code to the native project: `npm run build && npx cap sync`

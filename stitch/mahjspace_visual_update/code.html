@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MahjSpace - Tactile Tracker</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;800&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#072b14",
+              "primary-container": "#1f4128",
+              "secondary": "#745a27",
+              "secondary-container": "#fedb9b",
+              "on-secondary-container": "#795f2b",
+              "surface": "#fcf9f4",
+              "surface-container": "#f0ede8",
+              "surface-container-high": "#ebe8e3",
+              "surface-container-low": "#f6f3ee",
+              "surface-container-lowest": "#ffffff",
+              "on-surface": "#1c1c19",
+              "on-surface-variant": "#424842",
+              "outline": "#727971",
+              "outline-variant": "#c2c8bf",
+              "error": "#ba1a1a",
+              "success": "#43664a",
+              "concealed": "#5A8ED8"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif", "serif"],
+              "body": ["Manrope", "sans-serif"],
+              "label": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {
+              "DEFAULT": "0.125rem",
+              "lg": "0.25rem",
+              "xl": "0.5rem",
+              "2xl": "1rem",
+              "full": "9999px"
+            },
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .filled-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        body {
+            font-family: 'Manrope', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            background-color: #fcf9f4;
+        }
+        .font-noto-serif { font-family: 'Noto Serif', serif; }
+        
+        /* Custom scrollbar for mobile */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c2c8bf;
+            border-radius: 10px;
+        }
+
+        @keyframes confettiFall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        .confetti {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            z-index: 1000;
+            pointer-events: none;
+            animation: confettiFall 3s linear forwards;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen pb-24">
+<div id="root"></div>
+<!-- React and Firebase Dependencies -->
+<script crossorigin="" src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin="" src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+        const { useState, useEffect, useCallback, useRef, useMemo } = React;
+
+        // --- Firebase Config ---
+        // (Keeping exact config from source)
+        const firebaseConfig = {
+          apiKey: "AIzaSyBaRTEtsnczGDR2_ICNR2D_6ZpKOmwrKgQ",
+          authDomain: "mahjspace-5e540.firebaseapp.com",
+          projectId: "mahjspace-5e540",
+          storageBucket: "mahjspace-5e540.firebasestorage.app",
+          messagingSenderId: "949973264397",
+          appId: "1:949973264397:web:a283d7e23b2237fc8c8d44"
+        };
+
+        // Standard dynamic loading of Firebase to ensure it works in browser script tags
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail, updateProfile } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, query, where, onSnapshot, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // --- Constants & Data ---
+        const CARD_DATA = [
+            { name: "2026", hands: [{ hand: "222 000 2222 6666", value: "X 25" }, { hand: "2026 DDD 2222 DDD", value: "X 25" }, { hand: "FFF 2026 222 6666", value: "X 25" }, { hand: "22 00 222 666 NEWS", value: "C 30" }] },
+            { name: "2468", hands: [{ hand: "222 444 6666 8888", value: "X 25" }, { hand: "222 444 6666 8888", value: "X 25" }, { hand: "FF 2222 44 66 8888", value: "X 30" }, { hand: "EE 22 444 666 88 WW", value: "X 30" }, { hand: "2222 DDD 8888 DDD", value: "X 25" }, { hand: "FFF 22 44 666 8888", value: "X 25" }, { hand: "2468 2222 D 2222 D", value: "X 25" }, { hand: "FFF 2468 FFF 2222", value: "X 30" }, { hand: "FF 246 888 246 888", value: "C 30" }] },
+            { name: "Like Numbers", hands: [{ hand: "1111 FFFFFF 1111", value: "X 30" }, { hand: "1111 D 111 D 1111 D", value: "X 25" }, { hand: "FF 1111 11 1111 DD", value: "X 25" }] },
+            { name: "Quints", hands: [{ hand: "FF 111 2222 33333", value: "X 40" }, { hand: "11111 NNNN 22222", value: "X 45" }, { hand: "FF 11111 11 11111", value: "X 45" }] },
+            { name: "Consecutive Run", hands: [{ hand: "11 222 33 444 5555", value: "X 25" }, { hand: "111 2222 333 4444", value: "X 25" }, { hand: "FFF 1111 234 5555", value: "X 25" }, { hand: "FFF 123 4444 5555", value: "X 25" }, { hand: "FF 11 222 3333 DDD", value: "X 25" }, { hand: "111 222 3333 DD DD", value: "X 25" }, { hand: "11 22 111 222 3333", value: "X 30" }, { hand: "FF 1 22 333 1 22 333", value: "C 30" }] },
+            { name: "13579", hands: [{ hand: "11 333 5555 777 99", value: "X 25" }, { hand: "111 3333 333 5555", value: "X 25" }, { hand: "1111 333 5555 DDD", value: "X 25" }, { hand: "FFFF 1111 + 9999 = 10", value: "X 25" }, { hand: "FFF 135 7777 9999", value: "X 25" }, { hand: "111 333 5555 DD DD", value: "X 25" }, { hand: "11 333 NEWS 333 55", value: "X 30" }, { hand: "1111 33 55 77 9999", value: "X 30" }, { hand: "FF 11 33 111 333 55", value: "C 30" }] },
+            { name: "Winds & Dragons", hands: [{ hand: "NNNN EEE WWW SSSS", value: "X 25" }, { hand: "NNN EEEE WWWW SSS", value: "X 25" }, { hand: "FF 123 DD DDD DDDD", value: "X 25" }, { hand: "FFF NN EE WWW SSSS", value: "X 25" }, { hand: "FFFF DDD NEWS DDD", value: "X 25" }, { hand: "NNNN 1 11 111 SSSS", value: "X 25" }, { hand: "EEEE 2 22 222 WWWW", value: "X 25" }, { hand: "NN EEE WWW SS 2026", value: "X 30" }, { hand: "NN EE WWW SSS DDDD", value: "C 30" }] },
+            { name: "369", hands: [{ hand: "333 6666 666 9999", value: "X 25" }, { hand: "FF 3333 + 6666 = 9999", value: "X 25" }, { hand: "3333 DDD 3333 DDD", value: "X 25" }, { hand: "FFF 3333 369 9999", value: "X 25" }, { hand: "33 66 99 3333 3333", value: "X 25" }, { hand: "FF 333 D 666 D 999 D", value: "C 30" }] },
+            { name: "Singles and Pairs", hands: [{ hand: "NN EW SS 11 22 33 44", value: "C 50" }, { hand: "FF 2468 DD 2468 DD", value: "C 50" }, { hand: "336699 336699 33", value: "C 50" }, { hand: "FF 11 22 11 22 11 22", value: "C 50" }, { hand: "11 33 55 77 99 11 11", value: "C 50" }, { hand: "FF 2026 2026 2026", value: "C 75" }] },
+        ];
+
+        const TOTAL_HANDS = 57;
+        const MILESTONE_BADGES = {
+            1: { icon: "🌸", label: "Deflowered!" },
+            5: { icon: "🐣", label: "Crak Baby" },
+            10: { icon: "🎲", label: "On a Roll" },
+            20: { icon: "🔥", label: "Hot Hand" },
+            30: { icon: "🐉", label: "Dragon Slayer" },
+            40: { icon: "🍕", label: "Halfway to Mahj-ic" },
+            50: { icon: "💅", label: "Mahj-esty" },
+            60: { icon: "🌬️", label: "Wind Beneath My Tiles" },
+            70: { icon: "🦅", label: "Lady Bird Legend" },
+            80: { icon: "😤", label: "One Tile Away" },
+            90: { icon: "🚀", label: "So Close" },
+            100: { icon: "👑", label: "Grand Mahj-ster" },
+        };
+
+        // --- Helper Components ---
+
+        function HandTiles({ text }) {
+            const groups = text.split(" ");
+            const colors = ["text-error", "text-success", "text-blue-500"];
+            let colorIdx = 0;
+            const colorMap = {};
+
+            return (
+                <div className="flex flex-wrap gap-x-2">
+                    {groups.map((group, i) => {
+                        const isNumeric = /^\d+$/.test(group);
+                        let cls = "text-on-surface";
+                        if (isNumeric) {
+                            if (colorMap[group] === undefined) {
+                                colorMap[group] = colors[colorIdx % colors.length];
+                                colorIdx++;
+                            }
+                            cls = colorMap[group];
+                        }
+                        return <span key={i} className={`font-mono font-bold tracking-wider ${cls}`}>{group}</span>
+                    })}
+                </div>
+            );
+        }
+
+        function Confetti() {
+            const [pieces, setPieces] = useState([]);
+            useEffect(() => {
+                const colors = ["#C9A96E", "#5CB87A", "#7B93DB", "#E85D5D"];
+                const newPieces = Array.from({ length: 50 }).map((_, i) => ({
+                    id: i,
+                    left: Math.random() * 100 + "vw",
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    delay: Math.random() * 2 + "s",
+                    size: Math.random() * 8 + 4 + "px"
+                }));
+                setPieces(newPieces);
+            }, []);
+
+            return pieces.map(p => (
+                <div key={p.id} className="confetti" style={{ 
+                    left: p.left, 
+                    backgroundColor: p.color, 
+                    animationDelay: p.delay,
+                    width: p.size,
+                    height: p.size
+                }} />
+            ));
+        }
+
+        // --- Main App ---
+
+        function App() {
+            const [user, setUser] = useState(null);
+            const [loading, setLoading] = useState(true);
+            const [view, setView] = useState("tracker"); // tracker | friends
+            const [authMode, setAuthMode] = useState("login");
+            const [authData, setAuthData] = useState({ email: "", password: "", name: "", team: "Lady Birds" });
+            const [error, setError] = useState("");
+            const [userData, setUserData] = useState(null);
+            const [checks, setChecks] = useState({});
+            const [openCats, setOpenCats] = useState({});
+            const [milestones, setMilestones] = useState({});
+            const [celebration, setCelebration] = useState(null);
+            const [teamMembers, setTeamMembers] = useState([]);
+            const [teamChecks, setTeamChecks] = useState({});
+
+            // Auth State Observer
+            useEffect(() => {
+                const unsub = onAuthStateChanged(auth, (u) => {
+                    setUser(u);
+                    setLoading(false);
+                });
+                return unsub;
+            }, []);
+
+            // Load Personal Data
+            useEffect(() => {
+                if (!user) return;
+                
+                const unsubUser = onSnapshot(doc(db, "users", user.uid), (snap) => {
+                    if (snap.exists()) setUserData(snap.data());
+                });
+
+                const unsubChecks = onSnapshot(doc(db, "checks", user.uid), (snap) => {
+                    setChecks(snap.exists() ? snap.data() : {});
+                });
+
+                const unsubMilestones = onSnapshot(doc(db, "milestones", user.uid), (snap) => {
+                    setMilestones(snap.exists() ? snap.data() : {});
+                });
+
+                return () => { unsubUser(); unsubChecks(); unsubMilestones(); };
+            }, [user]);
+
+            // Load Team Data
+            useEffect(() => {
+                if (!userData?.team) return;
+
+                const q = query(collection(db, "users"), where("team", "==", userData.team.toLowerCase()));
+                const unsubTeam = onSnapshot(q, (snap) => {
+                    const members = [];
+                    snap.forEach(d => members.push({ uid: d.id, ...d.data() }));
+                    setTeamMembers(members);
+
+                    // For each member, we need their check count
+                    members.forEach(m => {
+                        onSnapshot(doc(db, "checks", m.uid), (cSnap) => {
+                            setTeamChecks(prev => ({ ...prev, [m.uid]: cSnap.exists() ? cSnap.data() : {} }));
+                        });
+                    });
+                });
+
+                return unsubTeam;
+            }, [userData?.team]);
+
+            const handleAuth = async () => {
+                setError("");
+                try {
+                    if (authMode === "signup") {
+                        if (!authData.name || !authData.email || !authData.password) throw new Error("Please fill in all fields.");
+                        const cred = await createUserWithEmailAndPassword(auth, authData.email, authData.password);
+                        await updateProfile(cred.user, { displayName: authData.name });
+                        await setDoc(doc(db, "users", cred.user.uid), {
+                            name: authData.name,
+                            email: authData.email.toLowerCase(),
+                            team: authData.team.toLowerCase(),
+                            createdAt: new Date().toISOString()
+                        });
+                    } else {
+                        await signInWithEmailAndPassword(auth, authData.email, authData.password);
+                    }
+                } catch (e) {
+                    setError(e.message);
+                }
+            };
+
+            const toggleCheck = async (catIdx, handIdx) => {
+                const key = `${catIdx}-${handIdx}`;
+                const newChecks = { ...checks, [key]: !checks[key] };
+                setChecks(newChecks);
+                await setDoc(doc(db, "checks", user.uid), newChecks);
+
+                const count = Object.values(newChecks).filter(Boolean).length;
+                const pct = Math.round((count / TOTAL_HANDS) * 100);
+
+                // Milestone Logic
+                if (!checks[key]) { // Only celebrate on checking, not unchecking
+                    const mKey = count === 1 ? 1 : [5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].find(m => pct >= m && !milestones[m]);
+                    if (mKey) {
+                        const newM = { ...milestones, [mKey]: true };
+                        setMilestones(newM);
+                        await setDoc(doc(db, "milestones", user.uid), newM);
+                        setCelebration(mKey);
+                    }
+                }
+            };
+
+            const myCount = Object.values(checks).filter(Boolean).length;
+            const myPct = Math.round((myCount / TOTAL_HANDS) * 100);
+
+            if (loading) return <div className="flex h-screen items-center justify-center bg-surface font-headline text-2xl text-primary">MahjSpace</div>;
+
+            if (!user) return (
+                <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-surface">
+                    <div className="w-full max-w-sm space-y-8 bg-surface-container-lowest p-8 rounded-2xl shadow-xl border border-outline-variant/10">
+                        <div className="text-center">
+                            <h1 className="font-headline text-4xl font-extrabold text-primary">MahjSpace</h1>
+                            <p className="mt-2 font-body text-secondary uppercase tracking-widest text-[10px] font-bold">Progress Tracker</p>
+                        </div>
+
+                        <div className="space-y-4">
+                            {authMode === "signup" && (
+                                <input 
+                                    className="w-full rounded-lg border-outline-variant bg-surface-container-low p-4 text-sm focus:ring-primary" 
+                                    placeholder="Full Name" 
+                                    onChange={e => setAuthData({...authData, name: e.target.value})}
+                                />
+                            )}
+                            <input 
+                                className="w-full rounded-lg border-outline-variant bg-surface-container-low p-4 text-sm focus:ring-primary" 
+                                placeholder="Email" 
+                                type="email"
+                                onChange={e => setAuthData({...authData, email: e.target.value})}
+                            />
+                            <input 
+                                className="w-full rounded-lg border-outline-variant bg-surface-container-low p-4 text-sm focus:ring-primary" 
+                                placeholder="Password" 
+                                type="password"
+                                onChange={e => setAuthData({...authData, password: e.target.value})}
+                            />
+                            {authMode === "signup" && (
+                                <input 
+                                    className="w-full rounded-lg border-outline-variant bg-surface-container-low p-4 text-sm focus:ring-primary" 
+                                    placeholder="Team Name (e.g. Lady Birds)" 
+                                    onChange={e => setAuthData({...authData, team: e.target.value})}
+                                />
+                            )}
+                            {error && <p className="text-xs text-error font-bold text-center">{error}</p>}
+                            <button 
+                                onClick={handleAuth}
+                                className="w-full rounded-lg bg-primary py-4 font-bold text-secondary-container uppercase tracking-tight shadow-md hover:opacity-90 active:scale-[0.98] transition-all"
+                            >
+                                {authMode === "login" ? "Sign In" : "Join the Table"}
+                            </button>
+                        </div>
+
+                        <button 
+                            onClick={() => setAuthMode(authMode === "login" ? "signup" : "login")}
+                            className="w-full text-center text-xs font-bold text-outline hover:text-primary transition-colors"
+                        >
+                            {authMode === "login" ? "Don't have an account? Sign Up" : "Already registered? Sign In"}
+                        </button>
+                    </div>
+                </main>
+            );
+
+            return (
+                <div className="max-w-xl mx-auto min-h-screen flex flex-col">
+                    {/* TopAppBar */}
+                    <header className="bg-surface/95 backdrop-blur-md sticky top-0 z-40 px-6 py-4 flex justify-between items-center border-b border-outline-variant/10">
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-secondary-container font-bold border-2 border-surface-container-high overflow-hidden">
+                                {userData?.name ? userData.name[0].toUpperCase() : "?"}
+                            </div>
+                            <h1 className="font-headline text-2xl font-bold text-primary tracking-tight">MahjSpace</h1>
+                        </div>
+                        <button onClick={() => signOut(auth)} className="text-outline hover:text-primary transition-colors">
+                            <span className="material-symbols-outlined">logout</span>
+                        </button>
+                    </header>
+
+                    <main className="flex-grow p-6 space-y-8">
+                        {view === "tracker" ? (
+                            <>
+                                {/* Progress Section */}
+                                <section>
+                                    <div className="flex justify-between items-end mb-4">
+                                        <div>
+                                            <p className="font-label uppercase tracking-widest text-[10px] text-secondary font-bold mb-1">Session Record</p>
+                                            <h2 className="font-headline text-4xl font-extrabold text-primary">Tracker</h2>
+                                        </div>
+                                        <div className="text-right">
+                                            <p className="font-headline text-2xl font-bold text-primary">{myPct}%</p>
+                                            <p className="font-label text-[10px] uppercase tracking-tighter text-outline">{myCount}/{TOTAL_HANDS} Hands</p>
+                                        </div>
+                                    </div>
+                                    <div className="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+                                        <div className="h-full bg-gradient-to-r from-primary to-primary-container transition-all duration-700" style={{ width: `${myPct}%` }}></div>
+                                    </div>
+                                </section>
+
+                                {/* Tip Card */}
+                                <section className="relative">
+                                    <div className="bg-surface-container-lowest rounded-xl p-5 shadow-[0_4px_24px_rgba(28,28,25,0.06)] border-l-4 border-secondary relative z-10 mr-4 flex gap-4">
+                                        <span className="material-symbols-outlined text-secondary text-3xl filled-icon">lightbulb</span>
+                                        <div>
+                                            <p className="font-label uppercase tracking-widest text-[10px] text-secondary font-bold mb-1">Tactile Wisdom</p>
+                                            <p className="font-headline text-lg leading-snug text-on-surface">
+                                                When someone discards a <span className="text-primary font-bold">One Bam</span>, say <span className="italic">'Cheers!'</span> 🥂
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className="absolute top-2 right-0 w-32 h-full bg-secondary-container/20 rounded-xl -z-0"></div>
+                                </section>
+
+                                {/* Categories */}
+                                <section className="space-y-4">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <span className="font-label uppercase tracking-widest text-[10px] text-outline font-bold">Hand Categories</span>
+                                    </div>
+
+                                    {CARD_DATA.map((cat, ci) => {
+                                        const doneInCat = cat.hands.filter((_, hi) => checks[`${ci}-${hi}`]).length;
+                                        const isOpen = openCats[ci];
+                                        return (
+                                            <div key={ci} className="bg-surface-container-low rounded-xl overflow-hidden shadow-sm">
+                                                <button 
+                                                    onClick={() => setOpenCats({...openCats, [ci]: !isOpen})}
+                                                    className="w-full flex items-center justify-between p-5 hover:bg-surface-container-high transition-colors"
+                                                >
+                                                    <div className="flex items-center gap-4">
+                                                        <div className={`w-8 h-8 flex items-center justify-center rounded-lg font-bold text-xs ${doneInCat === cat.hands.length ? 'bg-success text-white' : 'bg-primary text-secondary-container'}`}>
+                                                            {ci + 1}
+                                                        </div>
+                                                        <span className="font-headline text-lg font-bold text-primary">{cat.name}</span>
+                                                    </div>
+                                                    <div className="flex items-center gap-4">
+                                                        <span className="text-[10px] font-bold text-outline">{doneInCat}/{cat.hands.length}</span>
+                                                        <span className={`material-symbols-outlined text-outline transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>expand_more</span>
+                                                    </div>
+                                                </button>
+
+                                                {isOpen && (
+                                                    <div className="bg-surface-container-lowest border-t border-outline-variant/10 divide-y divide-outline-variant/5">
+                                                        {cat.hands.map((h, hi) => (
+                                                            <div key={hi} className="flex items-start gap-4 p-5">
+                                                                <button 
+                                                                    onClick={() => toggleCheck(ci, hi)}
+                                                                    className={`mt-1 w-6 h-6 rounded-full flex items-center justify-center border-2 transition-all ${checks[`${ci}-${hi}`] ? 'bg-success border-success text-white' : 'border-outline-variant'}`}
+                                                                >
+                                                                    {checks[`${ci}-${hi}`] && <span className="material-symbols-outlined text-base">check</span>}
+                                                                </button>
+                                                                <div className="flex-grow">
+                                                                    <div className="mb-2">
+                                                                        <HandTiles text={h.hand} />
+                                                                    </div>
+                                                                    <div className="flex justify-between items-center">
+                                                                        <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full ${h.value.includes('C') ? 'bg-blue-100 text-blue-800' : 'bg-secondary-container/30 text-on-secondary-container'}`}>
+                                                                            {h.value.includes('C') ? 'Concealed' : 'Open'}
+                                                                        </span>
+                                                                        <span className="font-label text-[10px] font-bold text-secondary">{h.value.split(' ')[1]} PTS</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        );
+                                    })}
+                                </section>
+                            </>
+                        ) : (
+                            /* Friends / Team View */
+                            <div className="space-y-10">
+                                <header>
+                                    <p className="font-label uppercase tracking-widest text-[10px] text-secondary font-bold mb-1">Squad Goals</p>
+                                    <h2 className="font-headline text-4xl font-extrabold text-primary">Team Hub</h2>
+                                    <div className="mt-2 inline-block px-3 py-1 bg-secondary-container rounded-full text-[10px] font-bold text-on-secondary-container uppercase">
+                                        Team: {userData?.team}
+                                    </div>
+                                </header>
+
+                                <section className="space-y-6">
+                                    <div className="flex items-center justify-between">
+                                        <span className="font-label uppercase tracking-widest text-[10px] text-outline font-bold">My Teammates</span>
+                                        <span className="material-symbols-outlined text-outline text-sm">group_add</span>
+                                    </div>
+
+                                    {teamMembers.length > 1 ? (
+                                        <div className="grid gap-6">
+                                            {teamMembers.map(m => {
+                                                const mCount = Object.values(teamChecks[m.uid] || {}).filter(Boolean).length;
+                                                const mPct = Math.round((mCount / TOTAL_HANDS) * 100);
+                                                const mBadges = Object.keys(MILESTONE_BADGES).filter(k => mPct >= parseInt(k)).sort((a,b) => b-a);
+                                                
+                                                return (
+                                                    <div key={m.uid} className="bg-surface-container-low p-6 rounded-2xl flex items-start gap-5 shadow-sm border-b-2 border-outline-variant/10">
+                                                        <div className="relative">
+                                                            <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-surface-container-lowest shadow-sm flex items-center justify-center bg-primary-container text-secondary-container font-headline text-xl">
+                                                                {m.name[0].toUpperCase()}
+                                                            </div>
+                                                            {mBadges[0] && (
+                                                                <div className="absolute -bottom-1 -right-1 bg-secondary w-7 h-7 rounded-full flex items-center justify-center border-2 border-surface-container-low shadow-md">
+                                                                    <span className="text-sm">{MILESTONE_BADGES[mBadges[0]].icon}</span>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                        <div className="flex-grow">
+                                                            <div className="flex justify-between items-start mb-2">
+                                                                <div>
+                                                                    <h3 className="font-headline text-lg text-on-surface font-bold">{m.name}</h3>
+                                                                    <span className="font-label text-[9px] bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-full font-bold uppercase tracking-tighter">
+                                                                        {mPct >= 100 ? 'Grandmaster' : mPct >= 50 ? 'Dragon Tier' : 'Apprentice'}
+                                                                    </span>
+                                                                </div>
+                                                                <span className="font-headline text-sm font-bold text-primary">{mPct}%</span>
+                                                            </div>
+                                                            <div className="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden mb-3">
+                                                                <div className="h-full bg-gradient-to-r from-primary to-primary-container rounded-full" style={{ width: `${mPct}%` }}></div>
+                                                            </div>
+                                                            <div className="flex items-center gap-1 opacity-60">
+                                                                {mBadges.slice(0, 5).map(b => <span key={b} className="text-sm">{MILESTONE_BADGES[b].icon}</span>)}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    ) : (
+                                        <div className="bg-surface-container-lowest p-10 rounded-2xl text-center border-2 border-dashed border-outline-variant">
+                                            <p className="text-outline text-sm">Tell your friends to join team: <br/><strong className="text-primary uppercase tracking-widest">{userData?.team}</strong></p>
+                                        </div>
+                                    )}
+                                </section>
+
+                                {/* Bento Stats */}
+                                <div className="grid grid-cols-2 gap-4 pt-4">
+                                    <div className="bg-primary p-5 rounded-2xl flex flex-col justify-between aspect-square shadow-lg">
+                                        <span className="material-symbols-outlined text-secondary-container text-3xl">table_bar</span>
+                                        <div>
+                                            <p className="font-headline text-xl text-white">History</p>
+                                            <p className="font-label text-[9px] text-secondary-container/60 uppercase tracking-widest">Coming Soon</p>
+                                        </div>
+                                    </div>
+                                    <div className="bg-secondary-container p-5 rounded-2xl flex flex-col justify-between aspect-square shadow-lg">
+                                        <span className="material-symbols-outlined text-on-secondary-container text-3xl filled-icon">military_tech</span>
+                                        <div>
+                                            <p className="font-headline text-xl text-on-secondary-container">Awards</p>
+                                            <p className="font-label text-[9px] text-on-secondary-container/60 uppercase tracking-widest">Rank #1</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </main>
+
+                    {/* BottomNavBar */}
+                    <nav className="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center pb-8 pt-4 px-4 bg-surface/80 backdrop-blur-md shadow-[0_-4px_24px_rgba(28,28,25,0.06)] rounded-t-3xl border-t border-primary/5">
+                        <button 
+                            onClick={() => setView("tracker")}
+                            className={`flex flex-col items-center justify-center px-8 py-2 rounded-xl transition-all duration-300 ${view === 'tracker' ? 'bg-gradient-to-br from-primary to-primary-container text-secondary-container scale-105' : 'text-outline'}`}
+                        >
+                            <span className={`material-symbols-outlined ${view === 'tracker' ? 'filled-icon' : ''}`}>playing_cards</span>
+                            <span className="font-label text-[9px] font-bold uppercase tracking-tighter mt-1">Tracker</span>
+                        </button>
+                        <button 
+                            onClick={() => setView("friends")}
+                            className={`flex flex-col items-center justify-center px-8 py-2 rounded-xl transition-all duration-300 ${view === 'friends' ? 'bg-gradient-to-br from-primary to-primary-container text-secondary-container scale-105' : 'text-outline'}`}
+                        >
+                            <span className={`material-symbols-outlined ${view === 'friends' ? 'filled-icon' : ''}`}>group</span>
+                            <span className="font-label text-[9px] font-bold uppercase tracking-tighter mt-1">Squad</span>
+                        </button>
+                    </nav>
+
+                    {/* Milestone Celebration Modal */}
+                    {celebration && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-primary/40 backdrop-blur-sm animate-in fade-in duration-300">
+                            <Confetti />
+                            <div className="bg-surface p-8 rounded-3xl shadow-2xl text-center max-w-xs w-full space-y-6 border-2 border-secondary-container animate-in zoom-in duration-300">
+                                <div className="text-6xl animate-bounce">{MILESTONE_BADGES[celebration].icon}</div>
+                                <div>
+                                    <h3 className="font-headline text-3xl font-bold text-primary">{MILESTONE_BADGES[celebration].label}</h3>
+                                    <p className="text-sm text-outline mt-2">You've unlocked a new achievement!</p>
+                                </div>
+                                <button 
+                                    onClick={() => setCelebration(null)}
+                                    className="w-full bg-primary text-secondary-container font-bold py-4 rounded-xl uppercase tracking-widest text-xs"
+                                >
+                                    Fucking Awesome
+                                </button>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body></html>

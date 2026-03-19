@@ -1,0 +1,56 @@
+# Deployment Guide: MahjSpace on Vercel
+
+To deploy MahjSpace as a high-fidelity web application, follow these steps to set up your environment, initialize your Firebase backend, and launch on Vercel.
+
+### 1. Prerequisites
+- **Node.js** installed on your machine.
+- A **GitHub** account.
+- A **Vercel** account (linked to GitHub).
+- A **Firebase** project (free tier is fine).
+
+### 2. Local Setup
+Create a new React project and install the necessary dependencies:
+
+```bash
+# Create the project
+npx create-react-app mahjspace
+cd mahjspace
+
+# Install Firebase
+npm install firebase
+```
+
+### 3. Source Code
+1. Replace the contents of `src/App.js` with the code provided in the **App.js** snippet on the canvas.
+2. Replace `src/index.js` with the code from the **index.js** snippet.
+3. (Optional) Create a `src/App.css` if you want to further customize the styles outside of the inline system.
+
+### 4. Firebase Configuration
+The code already contains a configuration object, but for a production environment, you should:
+1. Go to the [Firebase Console](https://console.firebase.google.com/).
+2. Enable **Authentication** (Email/Password).
+3. Enable **Cloud Firestore** in test mode or with appropriate security rules.
+4. Copy your project's configuration into the `firebaseConfig` constant in `App.js`.
+
+### 5. Deployment to Vercel
+Vercel makes deployment seamless via GitHub:
+
+```bash
+# Initialize git and push to GitHub
+git init
+git add .
+git commit -m "Initial commit of MahjSpace"
+# (Add your remote origin and push)
+
+# Deploy via Vercel CLI (or use the Vercel Dashboard)
+npm install -g vercel
+vercel
+```
+
+### 6. Commands Reference
+- `npm start`: Runs the app in development mode at `http://localhost:3000`.
+- `npm run build`: Bundles the app for production in the `build` folder.
+- `vercel --prod`: Deploys the latest build to your production URL.
+
+---
+*Note: Ensure your Firestore rules allow read/write access for authenticated users to enable the Friends and Tracker functionality.*

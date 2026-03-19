@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mahj Academy | MahjSpace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,700;1,400;1,700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary-fixed": "#261900",
+              "error-container": "#93000a",
+              "surface": "#001807",
+              "secondary": "#e4c285",
+              "on-primary-fixed-variant": "#474743",
+              "on-secondary-fixed-variant": "#5a4312",
+              "outline-variant": "#424842",
+              "primary-container": "#3a3a37",
+              "secondary-fixed-dim": "#e4c285",
+              "primary-fixed-dim": "#c8c6c2",
+              "background": "#001807",
+              "inverse-on-surface": "#15371f",
+              "on-secondary-container": "#d5b478",
+              "surface-dim": "#001807",
+              "on-surface-variant": "#c2c8bf",
+              "on-primary-fixed": "#1b1c19",
+              "tertiary": "#a1d2ab",
+              "surface-container-lowest": "#001205",
+              "surface-container-low": "#00210c",
+              "surface-bright": "#1e4027",
+              "secondary-fixed": "#ffdea4",
+              "on-tertiary-container": "#7faf89",
+              "on-error": "#690005",
+              "primary": "#c8c6c2",
+              "surface-tint": "#c8c6c2",
+              "tertiary-fixed": "#bcefc6",
+              "on-tertiary": "#07381d",
+              "on-primary": "#30312d",
+              "surface-container": "#02260f",
+              "outline": "#8c938a",
+              "on-tertiary-fixed": "#00210d",
+              "on-tertiary-fixed-variant": "#225031",
+              "on-primary-container": "#a5a49f",
+              "surface-variant": "#193c23",
+              "tertiary-container": "#144225",
+              "surface-container-high": "#0e3019",
+              "inverse-surface": "#c5ecc9",
+              "error": "#ffb4ab",
+              "on-secondary": "#412d00",
+              "inverse-primary": "#5f5e5b",
+              "secondary-container": "#5d4514",
+              "tertiary-fixed-dim": "#a1d2ab",
+              "on-error-container": "#ffdad6",
+              "surface-container-highest": "#193c23",
+              "on-background": "#c5ecc9",
+              "primary-fixed": "#e4e2dd",
+              "on-surface": "#c5ecc9"
+            },
+            fontFamily: {
+              "headline": ["Newsreader", "serif"],
+              "body": ["Manrope", "sans-serif"],
+              "label": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #001807;
+            color: #c8c6c2;
+            font-family: 'Manrope', sans-serif;
+        }
+        .serif-text {
+            font-family: 'Newsreader', serif;
+        }
+        .card-edition-bg {
+            background-color: #FDFCF8;
+            color: #1f4128;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="bg-[#001807] dark:bg-[#001807] flex justify-between items-center px-6 py-4 w-full docked full-width top-0 z-40">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#e4c285]" data-icon="menu_book">menu_book</span>
+<h1 class="text-2xl font-serif italic text-[#e4c285]">MahjSpace</h1>
+</div>
+<nav class="hidden md:flex gap-8">
+<span class="text-[#c8c6c2] font-body text-sm tracking-widest uppercase hover:bg-[#1e4027] transition-colors duration-300 px-2 py-1">Tracker</span>
+<span class="text-[#c8c6c2] font-body text-sm tracking-widest uppercase hover:bg-[#1e4027] transition-colors duration-300 px-2 py-1">Friends</span>
+<span class="text-[#e4c285] font-bold font-body text-sm tracking-widest uppercase px-2 py-1">Academy</span>
+<span class="text-[#c8c6c2] font-body text-sm tracking-widest uppercase hover:bg-[#1e4027] transition-colors duration-300 px-2 py-1">Lobby</span>
+</nav>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-[#c8c6c2]" data-icon="account_circle">account_circle</span>
+</div>
+</header>
+<main class="max-w-5xl mx-auto px-6 pt-12">
+<!-- Certification Progress Section (The Archivist's Hero) -->
+<section class="mb-16">
+<div class="card-edition-bg p-8 md:p-12 relative overflow-hidden flex flex-col md:flex-row justify-between items-start md:items-center gap-8 rounded-sm">
+<!-- Decorative element -->
+<div class="absolute top-0 right-0 opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-[200px]" data-icon="auto_stories">auto_stories</span>
+</div>
+<div class="relative z-10 max-w-lg">
+<h2 class="serif-text text-4xl md:text-5xl font-bold mb-4 tracking-tight">The Archivist's Path</h2>
+<p class="font-body text-lg opacity-80 mb-8 leading-relaxed">Your journey toward Mahjong Mastery is 64% complete. Refine your intuition through the sacred scrolls of the 2026 Card.</p>
+<div class="space-y-2 mb-8">
+<div class="flex justify-between items-end mb-1">
+<span class="font-body text-xs font-bold uppercase tracking-widest">Certification Progress</span>
+<span class="serif-text italic text-xl">64%</span>
+</div>
+<div class="h-1.5 w-full bg-[#1f4128]/10 overflow-hidden">
+<div class="h-full bg-[#1f4128] w-[64%]"></div>
+</div>
+</div>
+</div>
+<div class="relative z-10 flex flex-col items-center justify-center p-6 border border-[#1f4128]/20 bg-white/50 backdrop-blur-sm rounded-sm text-center">
+<span class="material-symbols-outlined text-4xl mb-2 text-[#1f4128]" data-icon="workspace_premium" data-weight="fill" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<p class="font-body text-[10px] uppercase tracking-[0.2em] mb-1">Current Tier</p>
+<p class="serif-text text-2xl font-bold">Apprentice Scribe</p>
+</div>
+</div>
+</section>
+<!-- Course Modules (Editorial Layout) -->
+<section class="space-y-20">
+<div class="flex items-baseline gap-4 mb-12">
+<h3 class="serif-text text-3xl font-bold text-[#c8c6c2]">Study Modules</h3>
+<div class="h-px flex-grow bg-[#c8c6c2]/10"></div>
+</div>
+<!-- Module 1 -->
+<div class="group grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+<div class="md:col-span-5 relative">
+<div class="aspect-[4/3] bg-surface-container-low overflow-hidden rounded-sm border border-outline-variant/30">
+<img alt="Fundamentals course" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" data-alt="Old leather mahjong tiles on a dark wood table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBo9_atJYIBrUDSp9zYqpdiC83IL-QhPe0Cj_nigMaPfT5qpWlOPdFlhGXZGyr6zapFfMXzUt7rrr3ABxU6isy9iN0PA5F47XYgmLC8royJkv-Gv3V2m9gvi6F_Mxt9huGz5NUEWX01w3goYgNRnH32VXkrNf-ZprpYT8LgZw9SXeXxv1tTocQBkYt1RC-Lap7Rbw6YTGi0jRHmXwueTGzAKO6Ts5cZ6fmT29Lh_VqGX500nbApRu8oC_9Jchv3IkHIfGnO34WwohNh"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-60"></div>
+</div>
+</div>
+<div class="md:col-span-7 flex flex-col justify-center">
+<div class="flex items-center gap-3 mb-4">
+<span class="text-secondary font-body text-[10px] uppercase tracking-[0.3em]">Module 01</span>
+<span class="text-[#c8c6c2]/40 text-xs">•</span>
+<span class="text-[#c8c6c2]/60 font-body text-xs italic">12 Lessons</span>
+</div>
+<h4 class="serif-text text-3xl font-bold mb-4 text-primary leading-tight">Fundamentals of the 2026 Card</h4>
+<p class="font-body text-[#c8c6c2]/70 mb-8 max-w-md">Deconstruct the shifting landscape of the new year's patterns. Learn to identify the core sequences that will dominate the table.</p>
+<div class="flex items-center gap-6">
+<button class="bg-secondary text-on-secondary px-8 py-3 font-body text-xs font-bold uppercase tracking-widest rounded-sm hover:translate-y-[-2px] transition-all duration-300 shadow-lg shadow-black/20">
+                            Continue
+                        </button>
+<div class="flex-grow max-w-[120px]">
+<div class="flex justify-between items-end mb-1">
+<span class="font-body text-[10px] uppercase opacity-40">Done</span>
+<span class="serif-text text-sm italic">85%</span>
+</div>
+<div class="h-1 bg-surface-container-high w-full">
+<div class="h-full bg-secondary w-[85%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Module 2 -->
+<div class="group grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+<div class="md:col-span-7 order-2 md:order-1 flex flex-col justify-center items-end text-right">
+<div class="flex items-center gap-3 mb-4">
+<span class="text-[#c8c6c2]/60 font-body text-xs italic">8 Lessons</span>
+<span class="text-[#c8c6c2]/40 text-xs">•</span>
+<span class="text-secondary font-body text-[10px] uppercase tracking-[0.3em]">Module 02</span>
+</div>
+<h4 class="serif-text text-3xl font-bold mb-4 text-primary leading-tight">Advanced Defensive Play</h4>
+<p class="font-body text-[#c8c6c2]/70 mb-8 max-w-md">The art of the fold. Master the psychological depth of concealing your hand while dismantling your opponent's strategy.</p>
+<div class="flex items-center justify-end gap-6">
+<div class="flex-grow max-w-[120px]">
+<div class="flex justify-between items-end mb-1">
+<span class="font-body text-[10px] uppercase opacity-40">Done</span>
+<span class="serif-text text-sm italic">12%</span>
+</div>
+<div class="h-1 bg-surface-container-high w-full">
+<div class="h-full bg-secondary w-[12%]"></div>
+</div>
+</div>
+<button class="bg-secondary text-on-secondary px-8 py-3 font-body text-xs font-bold uppercase tracking-widest rounded-sm hover:translate-y-[-2px] transition-all duration-300 shadow-lg shadow-black/20">
+                            Continue
+                        </button>
+</div>
+</div>
+<div class="md:col-span-5 order-1 md:order-2 relative">
+<div class="aspect-[4/3] bg-surface-container-low overflow-hidden rounded-sm border border-outline-variant/30">
+<img alt="Defensive strategy" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" data-alt="A dark moody closeup of a single ivory mahjong tile being discarded" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoiA9lcs8OCzc09jilB3DZkEbJvyXGVuu5sWEGwTfLOdHnG_bGkXEloJ_uRsMDew-suwXpJ3BqgkhSW2h3dWvdZSaZLO0LpgppPX7yKtLhHuEFmqT2Mm3_lAVZHGcAuDVWpnT3TRrql-0RfGhtZ51CexOGD3V6A5zDOvXp3UoI0qO8B2ERWo0jojuY4JVW2obD3ogBpOHfVMrgAL_lm_CyX_6rzSb_uDc9VLwp8zXRXbVmu574o5yjvssyPFl6sVAPCp0V-98l3NKB"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-60"></div>
+</div>
+</div>
+</div>
+<!-- Module 3 -->
+<div class="group grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+<div class="md:col-span-5 relative">
+<div class="aspect-[4/3] bg-surface-container-low overflow-hidden rounded-sm border border-outline-variant/30">
+<img alt="Joker course" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" data-alt="Macro photo of golden light reflecting off a joker tile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZW0ydgTERpC5DhZfpcKQOaFWFr8mveRQVrLKR8jCDaw0tH8y_116R07OSkZSbxqu2eHcE_64nQ-4kIfCoo4e9J-7PV4hugLZHIBAWIWg2iSZa9TBPSFhjNhQ0uUdgtmgmRv-FFw37Utj75fE-WXBqlns995WGQrJ-ngpwlIvtAg9fVRejxaLsq0BBwxRIZAtZ9cUpSxJR8XF7-qUjXvj_1KXzkNSZh117cqrvEEOW2DqeqokPB0P-JzovmiEu3rIYaR0N-gXpTu1e"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-60"></div>
+</div>
+</div>
+<div class="md:col-span-7 flex flex-col justify-center">
+<div class="flex items-center gap-3 mb-4">
+<span class="text-secondary font-body text-[10px] uppercase tracking-[0.3em]">Module 03</span>
+<span class="text-[#c8c6c2]/40 text-xs">•</span>
+<span class="text-[#c8c6c2]/60 font-body text-xs italic">15 Lessons</span>
+</div>
+<h4 class="serif-text text-3xl font-bold mb-4 text-primary leading-tight">The Art of the Joker</h4>
+<p class="font-body text-[#c8c6c2]/70 mb-8 max-w-md">The most powerful tool in your arsenal. Discover the optimal timing for joker swaps and the math behind the wild tile.</p>
+<div class="flex items-center gap-6">
+<button class="border border-secondary/40 text-secondary px-8 py-3 font-body text-xs font-bold uppercase tracking-widest rounded-sm hover:bg-secondary/10 transition-all duration-300">
+                            Start
+                        </button>
+<div class="flex-grow max-w-[120px]">
+<div class="flex justify-between items-end mb-1">
+<span class="font-body text-[10px] uppercase opacity-40">Done</span>
+<span class="serif-text text-sm italic">0%</span>
+</div>
+<div class="h-1 bg-surface-container-high w-full">
+<div class="h-full bg-secondary w-0"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Signature Library Quote -->
+<section class="mt-32 mb-16 text-center max-w-2xl mx-auto border-t border-outline-variant/20 pt-16">
+<p class="serif-text text-2xl italic text-primary/60 leading-relaxed mb-4">"Mahjong is not merely a game of tiles, but a study of the unseen patterns that connect us all."</p>
+<p class="font-body text-[10px] uppercase tracking-[0.4em] text-secondary">The Head Librarian</p>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center pb-safe pt-2 px-4 bg-[#001807]/70 backdrop-blur-md z-50">
+<div class="flex flex-col items-center justify-center text-[#c8c6c2]/60 hover:text-[#e4c285] transition-colors duration-300">
+<span class="material-symbols-outlined mb-1" data-icon="analytics">analytics</span>
+<span class="font-sans text-[11px] uppercase tracking-wider">Tracker</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#c8c6c2]/60 hover:text-[#e4c285] transition-colors duration-300">
+<span class="material-symbols-outlined mb-1" data-icon="group">group</span>
+<span class="font-sans text-[11px] uppercase tracking-wider">Friends</span>
+</div>
+<!-- Active Tab: Academy -->
+<div class="flex flex-col items-center justify-center text-[#e4c285] bg-[#1e4027] rounded-sm px-3 py-1 scale-95-on-tap-duration-300">
+<span class="material-symbols-outlined mb-1" data-icon="school">school</span>
+<span class="font-sans text-[11px] uppercase tracking-wider">Academy</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#c8c6c2]/60 hover:text-[#e4c285] transition-colors duration-300">
+<span class="material-symbols-outlined mb-1" data-icon="style">style</span>
+<span class="font-sans text-[11px] uppercase tracking-wider">Lobby</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#c8c6c2]/60 hover:text-[#e4c285] transition-colors duration-300">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-sans text-[11px] uppercase tracking-wider">Profile</span>
+</div>
+</nav>
+</body></html>

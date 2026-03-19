@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed": "#c9ebce",
+              "on-secondary-fixed-variant": "#5a4312",
+              "surface-variant": "#e5e2dd",
+              "on-secondary-fixed": "#261900",
+              "error-container": "#ffdad6",
+              "surface-dim": "#dcdad5",
+              "surface-tint": "#43664a",
+              "on-tertiary-fixed": "#03210f",
+              "on-error-container": "#93000a",
+              "outline": "#727971",
+              "primary-fixed-dim": "#a9d0ae",
+              "on-surface-variant": "#424842",
+              "tertiary": "#0c2a18",
+              "on-secondary": "#ffffff",
+              "surface-bright": "#fcf9f4",
+              "outline-variant": "#c2c8bf",
+              "surface-container-highest": "#e5e2dd",
+              "tertiary-container": "#23402c",
+              "secondary-fixed": "#ffdea4",
+              "inverse-primary": "#a9d0ae",
+              "surface-container-lowest": "#ffffff",
+              "background": "#fcf9f4",
+              "on-error": "#ffffff",
+              "on-tertiary-container": "#8bac92",
+              "on-primary-container": "#87ad8d",
+              "error": "#ba1a1a",
+              "on-primary": "#ffffff",
+              "on-tertiary": "#ffffff",
+              "surface-container": "#f0ede8",
+              "on-primary-fixed-variant": "#2c4e34",
+              "on-surface": "#1c1c19",
+              "on-primary-fixed": "#00210c",
+              "primary-fixed": "#c5ecc9",
+              "primary-container": "#1f4128",
+              "surface-container-high": "#ebe8e3",
+              "on-secondary-container": "#795f2b",
+              "surface": "#fcf9f4",
+              "primary": "#072b14",
+              "secondary-container": "#fedb9b",
+              "inverse-on-surface": "#f3f0eb",
+              "tertiary-fixed-dim": "#adcfb3",
+              "secondary-fixed-dim": "#e4c285",
+              "surface-container-low": "#f6f3ee",
+              "secondary": "#745a27",
+              "on-background": "#1c1c19",
+              "inverse-surface": "#31302d",
+              "on-tertiary-fixed-variant": "#304d38"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #c2c8bf;
+        border-radius: 10px;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface min-h-screen pb-32">
+<!-- Top Navigation Shell -->
+<header class="bg-[#fcf9f4] dark:bg-[#121212] flex justify-between items-center px-6 py-4 w-full sticky top-0 z-40">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant/20">
+<img class="w-full h-full object-cover" data-alt="User profile avatar of a mahjong player" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8zmsKUx7D9vc8ksZAx2-2vMoDdRDQO5mpYvlxgAQ6N1CCIA_Zp2CNy33jYXJhVZSdjxuby6wysNwxe3BuzgiSuBvh5fclJdPmApP-zEXusAkzhlv9p3QCf14KFQSoomy6OedNAX-VM-8O3iSGDmUt7vp_j5wEdqPuqf5YvU7zB20Gy_voXyZZQ5_B4iTXrqlcSzlkBgMpKZ-0hG3c_4oqhZuAgY7FPY7ae0WQoORNqOIR661daH48-Nk_h1uQr9WwkGY7Hhyc3Svm"/>
+</div>
+<h1 class="font-noto-serif font-bold text-[#072b14] dark:text-[#fedb9b] text-2xl tracking-tight">MahjSpace</h1>
+</div>
+<button class="text-[#072b14] dark:text-[#fedb9b] hover:opacity-80 transition-opacity active:scale-95 active:duration-150">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<div class="bg-[#f2eee8] dark:bg-[#1f1f1f] h-[1px] w-full"></div>
+<main class="px-6 pt-8 max-w-2xl mx-auto">
+<!-- Search Bar Section -->
+<div class="mb-10">
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline text-lg">search</span>
+</div>
+<input class="w-full bg-surface-container-high border-none rounded-full py-4 pl-12 pr-6 text-on-surface placeholder:text-outline-variant focus:ring-1 focus:ring-secondary/20 transition-all font-body text-sm shadow-sm" placeholder="Search by name or email..." type="text"/>
+</div>
+</div>
+<!-- Pending Invites Section -->
+<section class="mb-12">
+<div class="flex items-baseline justify-between mb-6">
+<h2 class="font-headline text-xl font-bold text-primary">Pending Invites</h2>
+<span class="font-label text-[10px] uppercase tracking-widest text-secondary font-bold">1 Request</span>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-5 flex items-center gap-4 shadow-[0_4px_24px_rgba(28,28,25,0.04)] border-l-4 border-secondary">
+<div class="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Portrait of Samantha Wu" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOyXoZuLpuZVCH3dpcGUzXAcR3z9hx53KAM2TawwPaGsh6E0LhpWxX98df3okB3IroVR5PXwcsOH6vQacW79iVhUpissR8ZZG-hznaBrSoj9sY9uySVfs3RcJs_ITmbqkQqf6zT-YjEFLHTkcuVp0vjhgMRJ0Vow4XcblJ2vHz8cWY-48k6Ypr3gjQ_4WvJQC7C1SSGZEdKALs2ula1C0fKqJHUrDx0YOlS8x98dbp3JZNnhUXBtqgvzW045n8N9eKPAVgJeMitMBq"/>
+</div>
+<div class="flex-grow">
+<h3 class="font-headline text-lg text-on-surface">Samantha Wu</h3>
+<p class="font-label text-[11px] text-outline uppercase tracking-wider">Wants to join your table</p>
+</div>
+<div class="flex flex-col gap-2">
+<button class="bg-gradient-to-br from-[#072b14] to-[#1f4128] text-secondary-container px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-tighter hover:opacity-90 transition-all active:scale-95">
+                        Accept
+                    </button>
+<button class="border border-outline-variant text-outline px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-tighter hover:bg-surface-container transition-all active:scale-95">
+                        Decline
+                    </button>
+</div>
+</div>
+</section>
+<!-- My Friends List Section -->
+<section class="mb-8">
+<div class="flex items-baseline justify-between mb-6">
+<h2 class="font-headline text-xl font-bold text-primary">My Friends</h2>
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-sm">person_add</span>
+<span class="font-label text-[10px] uppercase tracking-widest font-bold">Invite New</span>
+</div>
+</div>
+<div class="space-y-6">
+<!-- Friend Card: Nikki R. -->
+<div class="bg-surface-container-low rounded-xl p-6 transition-all hover:bg-surface-container-high group border-b border-outline-variant/10">
+<div class="flex items-start gap-5">
+<div class="relative">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-surface-container-lowest shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Nikki R. profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHBCVnzfbB2g_Z3I_X0-Ys_UVY3vV8GsfXCwM27wGmdKs1RjITzRccNXeeWSBNu5avqIdb9VPYaCxbFhtHjnRxXps8SmMr8EAAcNvDMz2qFOm3XP0VpnhGz3DweHxkvWEo6DyMqU1jug792ykvNwQ75-ACKRljwINeDWlZz5lx7R3gXbOZj9iiXSo_ipVBfZvQw-ZBQQOEfQ7fVEzKt0AkFyr6kmi88erZ14derFXOIFU18wKsCILT_QYPYWaDVxS844aiaHQUl6QS"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-secondary w-6 h-6 rounded-full flex items-center justify-center border-2 border-surface-container-low">
+<span class="material-symbols-outlined text-[14px] text-secondary-container" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-headline text-lg text-on-surface group-hover:text-primary transition-colors">Nikki R.</h3>
+<span class="font-label text-[10px] bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-full font-bold uppercase tracking-tighter">Dragon Tier</span>
+</div>
+<span class="font-label text-xs font-bold text-primary">72%</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden mb-3">
+<div class="h-full bg-gradient-to-r from-primary to-primary-container rounded-full" style="width: 72%;"></div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-base">military_tech</span>
+<span class="font-body text-xs text-outline italic">Mastered the 'Green Dragon' sequence</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Friend Card: Janet T. -->
+<div class="bg-surface-container-lowest rounded-xl p-6 transition-all hover:bg-surface-container-low group shadow-sm border border-outline-variant/5">
+<div class="flex items-start gap-5">
+<div class="relative">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-surface-container-lowest shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Janet T. profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOn5RU5Tzc1Bx-EPGdbJ65W2swYkuG701ApJZYiP5dcuXxcc0bUNW_RWKnDTiOtqsBAdjwRtG1jYZZIZrL8OgKeWfWu0IkjgL4uP9lAghJ8tXPjoCfiFXZ5TCnPLFK56Cq2FV8WJxrJWNGAUy-eBPuwwxM_6X2zy9cGm2O7EwA3qR-KdDX1a3mUnh_6Iey8DhuUK-bx1emrXuC3tSTej0y0PMKwY1H9OvwXDxD2wksxQAzywYtTIaREHi8dQyj867szq63qVVSuj7Q"/>
+</div>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-headline text-lg text-on-surface group-hover:text-primary transition-colors">Janet T.</h3>
+<span class="font-label text-[10px] bg-surface-container-high text-outline px-2 py-0.5 rounded-full font-bold uppercase tracking-tighter">Apprentice</span>
+</div>
+<span class="font-label text-xs font-bold text-primary">45%</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden mb-3">
+<div class="h-full bg-gradient-to-r from-primary to-primary-container rounded-full" style="width: 45%;"></div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-base">stars</span>
+<span class="font-body text-xs text-outline italic">Completed 'Basic Tile Rituals'</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Friend Card: Diane L. -->
+<div class="bg-surface-container-low rounded-xl p-6 transition-all hover:bg-surface-container-high group border-b border-outline-variant/10">
+<div class="flex items-start gap-5">
+<div class="relative">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-surface-container-lowest shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Diane L. profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWcqnuI5iQ_v5ZCvYgvr1aADlBDQu9Z8DOH_0-SOhf6gSxMhfjWrzQ3_pKajE3ZppjBb60iBBTNqVAzMcDYQ33Pa0vDr-2Xw7Lj_jVhpOOyPBAEf6GGnB8te0y62EjjHelcR3h3FSPR2YNbqcOIMI37Pc-LBkULfx5ssU1-9k-PRyx-EIEj6fb1IpCej9VvjMsSZYxssK4cloLJt2ryB_TNSE2t2tFHT31KfrjurjREQogDlFSHcNQw8OgRfxdvb1dSwc-69ibQ31W"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-primary w-6 h-6 rounded-full flex items-center justify-center border-2 border-surface-container-low">
+<span class="material-symbols-outlined text-[14px] text-primary-fixed" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-headline text-lg text-on-surface group-hover:text-primary transition-colors">Diane L.</h3>
+<span class="font-label text-[10px] bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-full font-bold uppercase tracking-tighter">Grandmaster</span>
+</div>
+<span class="font-label text-xs font-bold text-primary">90%</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden mb-3">
+<div class="h-full bg-gradient-to-r from-primary to-primary-container rounded-full" style="width: 90%;"></div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-base">emoji_events</span>
+<span class="font-body text-xs text-outline italic">10 Consecutive Wins Badge</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Activity / Bento Moment -->
+<section class="mt-12 grid grid-cols-2 gap-4">
+<div class="bg-primary p-5 rounded-2xl flex flex-col justify-between aspect-square">
+<span class="material-symbols-outlined text-secondary-container text-3xl">groups</span>
+<div>
+<p class="font-headline text-xl text-white">Start Table</p>
+<p class="font-label text-[10px] text-on-tertiary-container uppercase tracking-widest mt-1">Invite friends now</p>
+</div>
+</div>
+<div class="bg-secondary-container p-5 rounded-2xl flex flex-col justify-between aspect-square">
+<span class="material-symbols-outlined text-secondary text-3xl" style="font-variation-settings: 'FILL' 1;">history</span>
+<div>
+<p class="font-headline text-xl text-on-secondary-container">History</p>
+<p class="font-label text-[10px] text-secondary uppercase tracking-widest mt-1">Review past games</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center pb-8 pt-4 px-4 bg-[#fcf9f4]/80 dark:bg-[#121212]/80 backdrop-blur-md shadow-[0_-4px_24px_rgba(28,28,25,0.06)] rounded-t-3xl border-t border-[#072b14]/5">
+<!-- Tracker Tab -->
+<a class="flex flex-col items-center justify-center text-[#072b14]/50 dark:text-[#fcf9f4]/50 px-6 py-2 hover:text-[#745a27] transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="playing_cards">playing_cards</span>
+<span class="font-manrope text-[10px] font-bold uppercase tracking-tighter">Tracker</span>
+</a>
+<!-- Friends Tab (ACTIVE) -->
+<a class="flex flex-col items-center justify-center bg-gradient-to-br from-[#072b14] to-[#1f4128] text-[#fedb9b] rounded-xl px-6 py-2 Active: scale-90 duration-200 ease-out" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="group" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-manrope text-[10px] font-bold uppercase tracking-tighter">Friends</span>
+</a>
+</nav>
+</body></html>
